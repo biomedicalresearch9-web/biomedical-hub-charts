@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Global Dementia Burden · Neuroscience</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #fff; color: #1a1a1a; padding: 24px 28px 40px; max-width: 780px; margin: 0 auto; }
+  .section-label { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #888; margin-bottom: 4px; }
+  .chart-title { font-size: 20px; font-weight: 600; color: #111; margin-bottom: 4px; }
+  .chart-sub { font-size: 13px; color: #666; margin-bottom: 20px; line-height: 1.5; }
+  .chart-wrap { position: relative; width: 100%; height: 300px; margin-bottom: 12px; }
+  .legend { display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 28px; }
+  .legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: #666; }
+  .divider { border: none; border-top: 1px solid #eee; margin: 0 0 20px; }
+  .section-heading { font-size: 14px; font-weight: 600; color: #111; margin-bottom: 12px; }
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-bottom: 24px; }
+  .card { background: #f8f8f8; border-radius: 10px; padding: 14px 16px; }
+  .card-num { font-size: 26px; font-weight: 600; margin-bottom: 4px; }
+  .card-desc { font-size: 12px; color: #666; line-height: 1.5; }
+  .why-box { background: #f8f8f8; border-radius: 10px; padding: 16px 18px; margin-bottom: 16px; }
+  .why-box p { font-size: 13px; color: #555; line-height: 1.7; }
+  .source { font-size: 11px; color: #aaa; }
+  .source a { color: #aaa; }
+</style>
+</head>
+<body>
+<p class="section-label">Neuroscience · Public data explorer</p>
+<h1 class="chart-title">Global Alzheimer's & dementia burden, 1990–2050</h1>
+<p class="chart-sub">Estimated number of people living with Alzheimer's disease and other dementias worldwide (millions). Dashed line = projected values.<br>Source: Global Burden of Disease Study 2021 (GBD 2021) / The Lancet Public Health</p>
+
+<div class="chart-wrap">
+  <canvas id="neuroChart" role="img" aria-label="Line chart of global dementia cases. Confirmed: 20M in 1990, 57M in 2019. Projected to reach 153M by 2050.">1990: 20M. 2000: 28M. 2010: 41M. 2019: 57M. 2030 projected: 82M. 2050 projected: 153M.</canvas>
+</div>
+
+<div class="legend">
+  <span class="legend-item"><span style="width:20px;height:2.5px;background:#534AB7;display:inline-block;border-radius:2px;"></span> Confirmed estimates (GBD 2021)</span>
+  <span class="legend-item"><span style="width:20px;height:0;border-top:2.5px dashed #AFA9EC;display:inline-block;"></span> Projected to 2050</span>
+</div>
+
+<hr class="divider">
+<p class="section-heading">Key findings</p>
+<div class="cards">
+  <div class="card"><p class="card-num" style="color:#534AB7;">57M</p><p class="card-desc">People living with dementia globally in 2019 — a 160% increase in prevalence since 1990 (GBD 2021)</p></div>
+  <div class="card"><p class="card-num" style="color:#534AB7;">153M</p><p class="card-desc">Projected cases by 2050 — nearly tripling current numbers as global populations age</p></div>
+  <div class="card"><p class="card-num" style="color:#3C3489;">60%</p><p class="card-desc">Of all dementia cases occur in low- and middle-income countries, where healthcare access is most limited</p></div>
+  <div class="card"><p class="card-num" style="color:#7F77DD;">53%</p><p class="card-desc">Of all people living with dementia are women — biological and longevity factors both contribute to this disparity</p></div>
+</div>
+
+<div class="why-box">
+  <p class="section-heading" style="margin-bottom:8px;">Why this matters</p>
+  <p>Alzheimer's and related dementias represent one of the fastest-growing neurological crises globally. Unlike cancer or heart disease, dementia currently has no disease-modifying cure — existing drugs only slow progression. The steep projected rise to 153 million cases by 2050 is driven almost entirely by population aging and growth, not changes in individual risk. This makes early detection research, caregiver infrastructure, and policy investment urgent priorities, especially in lower-income regions where most future cases will occur.</p>
+</div>
+
+<p class="source">Data: <a href="https://www.thelancet.com/journals/lanpub/article/PIIS2468-2667(21)00249-8/fulltext" target="_blank">GBD 2021 Dementia Collaborators · Lancet Public Health (2022)</a> · Chart for educational use only</p>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const years = [1990,1995,2000,2005,2010,2015,2019,2021,2025,2030,2035,2040,2045,2050];
+const confirmed = [20,24,28,33,41,49,57,57,null,null,null,null,null,null];
+const projected = [null,null,null,null,null,null,57,62,70,82,100,118,136,153];
+
+new Chart(document.getElementById('neuroChart'), {
+  type:'line',
+  data:{
+    labels:years,
+    datasets:[
+      { label:'Confirmed (GBD 2021)', data:confirmed, borderColor:'#534AB7', backgroundColor:'rgba(83,74,183,0.08)', fill:true, tension:0.3, borderWidth:2.5, pointRadius:3, pointHoverRadius:5, spanGaps:false },
+      { label:'Projected to 2050', data:projected, borderColor:'#AFA9EC', backgroundColor:'rgba(175,169,236,0.07)', fill:true, tension:0.3, borderWidth:2.5, borderDash:[7,4], pointRadius:3, pointHoverRadius:5, spanGaps:false }
+    ]
+  },
+  options:{
+    responsive:true, maintainAspectRatio:false,
+    interaction:{ mode:'index', intersect:false },
+    plugins:{
+      legend:{ display:false },
+      tooltip:{ backgroundColor:'#fff', borderColor:'#e0e0e0', borderWidth:1, titleColor:'#333', bodyColor:'#555', callbacks:{ label: ctx => ` ${ctx.dataset.label}: ${ctx.parsed.y !== null ? ctx.parsed.y + 'M' : '—'}` } }
+    },
+    scales:{
+      x:{ ticks:{ color:'#999', font:{ size:11 } }, grid:{ color:'rgba(0,0,0,0.06)' } },
+      y:{ min:0, max:170, ticks:{ callback:v=>v+'M', color:'#999', font:{ size:11 } }, grid:{ color:'rgba(0,0,0,0.06)' } }
+    }
+  }
+});
+</script>
+</body>
+</html> 
