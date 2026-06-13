@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Global HIV/AIDS Trends · Epidemiology</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #fff; color: #1a1a1a; padding: 24px 28px 40px; max-width: 780px; margin: 0 auto; }
+  .section-label { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #888; margin-bottom: 4px; }
+  .chart-title { font-size: 20px; font-weight: 600; color: #111; margin-bottom: 4px; }
+  .chart-sub { font-size: 13px; color: #666; margin-bottom: 20px; line-height: 1.5; }
+  .tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+  .tab-btn { border: 1px solid #ddd; background: transparent; border-radius: 8px; padding: 6px 14px; font-size: 13px; cursor: pointer; color: #555; font-family: inherit; transition: all 0.15s; }
+  .tab-btn:hover { background: #f5f5f5; }
+  .tab-btn.active { background: #e8f0fe; color: #1a56db; border-color: transparent; font-weight: 500; }
+  .chart-wrap { position: relative; width: 100%; height: 300px; margin-bottom: 12px; }
+  .legend { display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 28px; }
+  .legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: #666; }
+  .divider { border: none; border-top: 1px solid #eee; margin: 0 0 20px; }
+  .section-heading { font-size: 14px; font-weight: 600; color: #111; margin-bottom: 12px; }
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-bottom: 24px; }
+  .card { background: #f8f8f8; border-radius: 10px; padding: 14px 16px; }
+  .card-num { font-size: 26px; font-weight: 600; margin-bottom: 4px; }
+  .card-desc { font-size: 12px; color: #666; line-height: 1.5; }
+  .why-box { background: #f8f8f8; border-radius: 10px; padding: 16px 18px; margin-bottom: 16px; }
+  .why-box p { font-size: 13px; color: #555; line-height: 1.7; }
+  .source { font-size: 11px; color: #aaa; }
+  .source a { color: #aaa; }
+</style>
+</head>
+<body>
+<p class="section-label">Epidemiology · Public data explorer</p>
+<h1 class="chart-title">Global HIV/AIDS epidemic trends, 1990–2024</h1>
+<p class="chart-sub">New HIV infections per year vs. people receiving antiretroviral therapy (ART) — the story of a pandemic being fought back.<br>Source: UNAIDS/WHO Epidemiological Estimates 2024</p>
+
+<div class="tabs">
+  <button class="tab-btn active" onclick="setView('both',this)">Both metrics</button>
+  <button class="tab-btn" onclick="setView('infections',this)">New infections</button>
+  <button class="tab-btn" onclick="setView('art',this)">People on ART</button>
+</div>
+
+<div class="chart-wrap">
+  <canvas id="epiChart" role="img" aria-label="Dual line chart. New HIV infections peaked at 3.5M in 1995 and declined to 1.3M in 2024. People on ART grew from near zero in 1995 to 32M in 2023.">New infections: 1.5M in 1990, peak 3.5M in 1995, 1.3M in 2024. ART: 0 in 1995, 7.7M in 2010, 32M in 2023.</canvas>
+</div>
+
+<div class="legend">
+  <span class="legend-item"><span style="width:20px;height:2.5px;background:#993556;display:inline-block;border-radius:2px;"></span> New HIV infections (millions/year)</span>
+  <span class="legend-item"><span style="width:20px;height:0;border-top:2.5px dashed #0F6E56;display:inline-block;"></span> People on antiretroviral therapy (millions)</span>
+</div>
+
+<hr class="divider">
+<p class="section-heading">Key findings</p>
+<div class="cards">
+  <div class="card"><p class="card-num" style="color:#993556;">−65%</p><p class="card-desc">Decline in new HIV infections since the 1995 peak of 3.5 million — driven by prevention programs and treatment access (UNAIDS 2024)</p></div>
+  <div class="card"><p class="card-num" style="color:#0F6E56;">32M</p><p class="card-desc">People on antiretroviral therapy globally by end of 2023, up from 7.7 million in 2010 — a historic scale-up</p></div>
+  <div class="card"><p class="card-num" style="color:#993556;">−74%</p><p class="card-desc">Decline in AIDS-related deaths since the 2004 peak — ART transformed HIV from a death sentence to a manageable condition</p></div>
+  <div class="card"><p class="card-num" style="color:#185FA5;">40.8M</p><p class="card-desc">People living with HIV globally in 2024 — total remains high because ART extends lives, not because infections are rising</p></div>
+</div>
+
+<div class="why-box">
+  <p class="section-heading" style="margin-bottom:8px;">Why this matters</p>
+  <p>The HIV/AIDS epidemic is one of epidemiology's most complex case studies — showing both how quickly an infectious disease can spread globally and how sustained international cooperation, scientific breakthroughs (antiretroviral therapy), and funding (PEPFAR, Global Fund) can bend a pandemic's curve. Despite this progress, 1.3 million new infections per year means the epidemic is far from over, particularly in Sub-Saharan Africa where 63% of new infections occur among women and girls. The gap between treatment access in high-income versus low-income countries remains a central equity challenge in global health.</p>
+</div>
+
+<p class="source">Data: <a href="https://www.unaids.org/en/resources/fact-sheet" target="_blank">UNAIDS/WHO Epidemiological Estimates 2024</a> · hiv.gov Global Statistics · Chart for educational use only</p>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const years = [1990,1992,1994,1995,1997,2000,2003,2005,2007,2010,2012,2015,2017,2019,2021,2022,2023,2024];
+const newInfections = [1.5,2.2,3.1,3.5,3.3,3.0,2.7,2.5,2.4,2.2,2.1,1.9,1.8,1.7,1.5,1.3,1.3,1.3];
+const onART =        [0.0,0.0,0.0,0.02,0.05,0.7,1.0,2.0,4.0,7.7,10.0,17.0,21.7,25.7,28.7,30.7,32.0,32.1];
+
+const allDs = [
+  { label:'New HIV infections (M/yr)', data:newInfections, borderColor:'#993556', backgroundColor:'rgba(153,53,86,0.08)', fill:true, tension:0.35, borderWidth:2.5, pointRadius:2, pointHoverRadius:5 },
+  { label:'People on ART (millions)', data:onART, borderColor:'#0F6E56', backgroundColor:'rgba(15,110,86,0.07)', fill:true, tension:0.35, borderWidth:2.5, borderDash:[7,4], pointRadius:2, pointHoverRadius:5 },
+];
+
+let chart;
+function buildChart(datasets) {
+  if (chart) chart.destroy();
+  chart = new Chart(document.getElementById('epiChart'), {
+    type:'line',
+    data:{ labels:years, datasets },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      interaction:{ mode:'index', intersect:false },
+      plugins:{
+        legend:{ display:false },
+        tooltip:{ backgroundColor:'#fff', borderColor:'#e0e0e0', borderWidth:1, titleColor:'#333', bodyColor:'#555', callbacks:{ label: ctx => ` ${ctx.dataset.label}: ${ctx.parsed.y.toFixed(1)}M` } }
+      },
+      scales:{
+        x:{ ticks:{ maxTicksLimit:12, color:'#999', font:{ size:11 } }, grid:{ color:'rgba(0,0,0,0.06)' } },
+        y:{ min:0, max:36, ticks:{ callback:v=>v+'M', color:'#999', font:{ size:11 } }, grid:{ color:'rgba(0,0,0,0.06)' } }
+      }
+    }
+  });
+}
+function setView(v,btn) {
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  if(v==='both') buildChart(allDs);
+  else if(v==='infections') buildChart([allDs[0]]);
+  else buildChart([allDs[1]]);
+}
+buildChart(allDs);
+</script>
+</body>
+</html> 
